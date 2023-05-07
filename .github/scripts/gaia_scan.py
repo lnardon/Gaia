@@ -11,7 +11,7 @@ def get_repo_env_vars(repo, token):
     response = requests.get(env_vars_url, headers=headers)
 
     if response.status_code != 200:
-        raise Exception(f"Error fetching environment variables" + response)
+        raise Exception(response)
 
     env_vars = [secret["name"] for secret in response.json()["secrets"]]
     return env_vars
