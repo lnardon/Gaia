@@ -1,0 +1,33 @@
+name: Gaia Variable Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  env_var_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyyaml
+
+    - name: Scan for environment variables
+      run: |
+        python .github/scripts/gaia_scan.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
