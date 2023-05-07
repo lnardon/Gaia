@@ -11,7 +11,7 @@ def get_repo_env_vars(repo, token):
     response = requests.get(env_vars_url, headers=headers)
 
     if response.status_code != 200:
-        raise Exception(f"Error fetching environment variables: {response.text}")
+        raise Exception(f"Error fetching environment variables" + response)
 
     env_vars = [secret["name"] for secret in response.json()["secrets"]]
     return env_vars
@@ -34,8 +34,7 @@ def scan_for_env_vars(env_vars):
 
 
 if __name__ == "__main__":
-    repo = os.environ["REPO_NAME"]
     token = os.environ["GITHUB_TOKEN"]
 
-    env_vars = get_repo_env_vars(repo, token)
+    env_vars = get_repo_env_vars("Gaia", token)
     scan_for_env_vars(env_vars)
