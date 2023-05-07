@@ -10,6 +10,7 @@ def get_repo_env_vars(repo, token):
     env_vars_url = f"{GITHUB_API_URL}/repos/{repo}/actions/secrets"
     response = requests.get(env_vars_url, headers=headers)
 
+    print(response)
     if response.status_code != 200:
         raise Exception(response)
 
