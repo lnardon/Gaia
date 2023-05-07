@@ -34,7 +34,7 @@ def scan_for_env_vars(env_vars):
 
 
 if __name__ == "__main__":
-    repo = os.environ["GITHUB_REPOSITORY"]
+    repo = os.environ["REPO_NAME"]
     token = os.environ["GITHUB_TOKEN"]
 
     env_vars = get_repo_env_vars(repo, token)
